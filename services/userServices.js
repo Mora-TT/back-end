@@ -1,54 +1,38 @@
-const applicationDAO = require('../model/DAO/applicationDAO');
+const testDAO = require('../model/DAO/testDAO');
 
-
-class UserService{
-    constructor(){
+class UserService {
+    constructor() {
 
     }
-    async register(details){
+    async register(details) {
 
         try {
-         let user=await UserDAO.createOneEntity(details);
-                if(user){
-                    console.log(user);
-                    const cmp = await bcrypt.compare(details.password, user.password);
-                    if (cmp){
-                        console.log('Password is correct');
-                        let token= jwt.sign({username:details.username},config.key,{expiresIn:"6h"});
-                        //console.log(token);
-                        return {
-                            err:0,
-                            token: token,
-                            msg:"Success",
-                        };
-                    }else{
-                        console.log('password is incorrect');
-                        return {
-                            err:1,
-                            token:"",
-                            msg:'password is incorrect'
-                        };
-                        
-                    }
-                }else{
-                    console.log('Check the user name again');
-                    return {
-                        err:1,
-                        token:"",
-                        msg:'check the user name'
-                    };
-                }
-        } 
-        catch (error) {
-            console.log('Error when finding user');
+           await testDAO.saveEntry(details);
             return {
-                err:1,
-                token:"",
-                msg:'Something wend wrong'
+                err: 0,
+                token: "",
+                msg: "Success",
+            };
+        }
+        catch (error) {
+            console.log('Error when saving the application');
+            return {
+                err: 1,
+                token: "",
+                msg: 'Something wend wrong'
             };
         }
 
     };
+    async getEntries() {
+        try {
+            var addresses = await testDAO.getEntries();
+            return addresses;
+        } catch (error) {
+            console.log('Error when finding Entries');
+        }
+
+    }
 
 };
 module.exports = UserService;
