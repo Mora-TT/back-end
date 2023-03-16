@@ -10,7 +10,7 @@ userController.register = async (req, res, next) => {
 
     try {
 
-        const state = await userServices.register(req.body);
+        const state = await userServices.register(req);
         //console.log(state);
         //const mail_list= [{"email":"sfg","df":"df"}];
         if (state.err == 0) {

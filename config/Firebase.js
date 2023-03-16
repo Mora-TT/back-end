@@ -21,7 +21,7 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+
   // Code to access Firestore data here
 
-module.exports = db;
+module.exports = app;

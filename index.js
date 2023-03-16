@@ -2,7 +2,8 @@
 const express=require('express');
 const cors = require('cors');
 const HttpStatus = require('http-status');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+
 dotenv.config();
 const http = require('http');
 const routes= require('./router/index');
@@ -13,6 +14,7 @@ const Port = process.env.PORT || 5000;
 
 app.use(cors())
 app.use(express.json());
+
 
 
 app.use('/',routes);
