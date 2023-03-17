@@ -50,9 +50,9 @@ class TestDAO {
         const db = getFirestore(app);
         const entries = collection(db, 'Entries');
         console.log(entry.body);
-        const {files}=entry.files;
-        const url =await this.uploadAndGetURL(files);
-        console.log(url);
+        //const {files}=entry.files;
+        //const url =await this.uploadAndGetURL(files);
+        //console.log(url);
         const data = {
             "name": entry.body["name"], // Example: get the name of the PDF from the HTTP request body
             "url": "url",
