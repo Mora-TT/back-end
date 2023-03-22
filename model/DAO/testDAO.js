@@ -46,20 +46,45 @@ class TestDAO {
 
     }
 
+    // static async saveEntry(entry) {
+    //     const db = getFirestore(app);
+    //     const entries = collection(db, 'Entries');
+    //     console.log(entry.body);
+
+    //     const data = {
+    //         "name": entry.body["name"], // Example: get the name of the PDF from the HTTP request body
+    //         "url": "url",
+    //         "created_at": new Date(),
+    //         "events":entry.body["events"]
+    //       };
+    //     await addDoc(entries,data);
+    //     return ;
+    // }
+
     static async saveEntry(entry) {
         const db = getFirestore(app);
         const entries = collection(db, 'Entries');
-        console.log(entry.body);
-        //const {files}=entry.files;
-        //const url =await this.uploadAndGetURL(files);
-        //console.log(url);
+        const pdfFile = entry.files.pdfFile;
+      
+        // Upload PDF file to Firebase Storage
+        const storage = getStorage(app);
+        const storageRef = ref(storage, 'pdf-files/' + pdfFile.name);
+        await uploadBytes(storageRef, pdfFile.data);
+      
+        // Get download URL for PDF file
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log(entry)
+      
+        // Create Firestore document
         const data = {
-            "name": entry.body["name"], // Example: get the name of the PDF from the HTTP request body
-            "url": "url",
-            "created_at": new Date()
-          };
-        await addDoc(entries,data);
-        return ;
-    }
+          "name": entry.body["name"],
+          "url": downloadURL,
+          "created_at": new Date(),
+          "events": entry.body["events"]
+        };
+        await addDoc(entries, data);
+      
+        return;
+      }
 }
 module.exports = TestDAO;
