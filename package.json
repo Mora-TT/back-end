@@ -12,8 +12,11 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "ejs": "^3.1.9",
     "express": "^4.17.1",
+    "file-api": "^0.10.4",
     "firebase": "^9.17.2",
+    "firebase-admin": "^11.5.0",
     "form-data": "^4.0.0",
     "googleapis": "^85.0.0",
     "http-status": "^1.5.0",
@@ -26,7 +29,8 @@
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

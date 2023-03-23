@@ -2,11 +2,13 @@ const express = require('express');
 const userController = require('../../controller/userController')
 const router=express.Router();
 const multer = require('multer');
-const upload = multer();
+var upload = multer({ dest: './uploads/'});
+var type = upload.single('recfile');
 //register
-router.post('/register',userController.register);
+router.post('/register',type,userController.register);
 //get all entries 
 router.get('/entries',userController.getEntries);
+
 
 
 
